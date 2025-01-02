@@ -1,0 +1,28 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Time & Mind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Time & Mind</div>
+        <div class="nav-links">
+            <a href="{{ url_for('clock') }}" class="nav-link">Clock</a>
+            <a href="{{ url_for('quotes') }}" class="nav-link">Quotes</a>
+            <a href="{{ url_for('favorites') }}" class="nav-link">★ Favorites</a>
+            <a href="{{ url_for('zettel') }}" class="nav-link">Zettel</a>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

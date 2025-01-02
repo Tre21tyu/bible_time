@@ -1,0 +1,124 @@
+<!-- templates/quotes.html -->
+{% extends "base.html" %}
+
+{% block title %}Daily Verses{% endblock %}
+
+{% block extra_css %}
+<style>
+.verse-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.time-display {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #333;
+    font-family: 'Courier New', monospace;
+}
+
+.verse-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.verse-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+.verse-reference {
+    font-weight: bold;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.control-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #3498db;
+    color: white;
+}
+
+.control-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.error-message {
+    color: #e74c3c;
+    padding: 1rem;
+    text-align: center;
+    display: none;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.refresh-indicator {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    margin-top: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="verse-container">
+    <div class="time-display" id="timeDisplay">00:00</div>
+    
+    <div class="verse-content">
+        <div class="loading" id="loading">Loading verse...</div>
+        <div class="verse-text" id="verseText"></div>
+        <div class="verse-reference" id="verseReference"></div>
+    </div>
+    
+    <div class="error-message" id="errorMessage"></div>
+    
+    <div class="controls">
+        <button class="control-btn" id="pauseBtn">
+            <span id="pauseBtnText">Pause</span>
+        </button>
+        <button class="control-btn" id="nextVerseBtn">Next Verse</button>
+        <button class="control-btn favorite-btn" id="favoriteBtn">
+            ★ Favorite
+        </button>
+    </div>
+    
+    <div class="refresh-indicator" id="refreshIndicator">
+        Next verse in: <span id="countdown">60</span> seconds
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quotes.js') }}"></script>
+{% endblock %}

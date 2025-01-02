@@ -1,8 +1,8 @@
-# YOUR PROJECT TITLE: Bible time
+#### Bible Time 
 #### Video Demo:  https://youtu.be/0k4oFe-9Zeo
 #### Description:
-TODO
-# Time & Mind: A Personal Knowledge Management System
+
+# Bible Time: A Personal Knowledge Management System
 
 This project combines three distinct tools into a unified web application: a customizable clock, a Bible verse generator synchronized with time, and a Zettelkasten note-taking system. Built with Flask and modern web technologies, it serves as a comprehensive personal dashboard for time management, spiritual reflection, and knowledge organization.
 

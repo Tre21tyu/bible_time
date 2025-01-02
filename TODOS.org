@@ -1,0 +1,5 @@
+* TODOS [0/4]
+- [ ] Fix save states
+- [ ] Configure Vim states
+- [ ] Configure Emmet shortcuts
+- [ ] Tidy up JS slop

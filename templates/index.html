@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <h1>Bible Time</h1>
+    <div class="feature-grid">
+        <a href="{{ url_for('clock') }}" class="feature-card">
+            <h2>Clock</h2>
+            <p>A customizable analog and digital clock</p>
+        </a>
+        <a href="{{ url_for('quotes') }}" class="feature-card">
+            <h2>Bible Verses</h2>
+            <p>Discover verses based on time</p>
+        </a>
+        <a href="{{ url_for('zettel') }}" class="feature-card">
+            <h2>Zettelkasten</h2>
+            <p>Your digital notebook</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-card h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.feature-card p {
+    color: #666;
+}
+</style>
+{% endblock %}

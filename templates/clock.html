@@ -1,0 +1,47 @@
+<!-- templates/clock.html -->
+{% extends "base.html" %}
+
+{% block title %}Clock{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: #000;
+        --secondary-color: #fff;
+        --clock-border-color: #000;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="clock-container">
+    <div class="clock">
+        <div class="needle hour"></div>
+        <div class="needle minute"></div>
+        <div class="needle second"></div>
+        <div class="center-point"></div>
+    </div>
+
+    <div class="time"></div>
+    <div class="date"></div>
+
+    <div class="color-picker">
+        <div class="color-option">
+            <label for="primary-color">Primary Color:</label>
+            <input type="color" id="primary-color" value="#000000">
+        </div>
+        <div class="color-option">
+            <label for="secondary-color">Secondary Color:</label>
+            <input type="color" id="secondary-color" value="#ffffff">
+        </div>
+        <div class="color-option">
+            <label for="clock-border-color">Clock Border:</label>
+            <input type="color" id="clock-border-color" value="#000000">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+{% endblock %}

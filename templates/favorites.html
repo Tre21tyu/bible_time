@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Favorite Verses{% endblock %}
+
+{% block extra_css %}
+<style>
+.favorites-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.favorite-verse {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.verse-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.verse-reference {
+    color: #666;
+    font-weight: bold;
+}
+
+.saved-date {
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.delete-btn:hover {
+    color: #c0392b;
+}
+
+.no-favorites {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    font-style: italic;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="favorites-container">
+    <h1>Favorite Verses</h1>
+    <div id="favoritesList"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadFavorites() {
+    const favoritesList = document.getElementById('favoritesList');
+    try {
+        const response = await fetch('/api/favorites');
+        const favorites = await response.json();
+        
+        if (favorites.length === 0) {
+            favoritesList.innerHTML = '<div class="no-favorites">No favorite verses yet.</div>';
+            return;
+        }
+        
+        favoritesList.innerHTML = favorites.map(verse => `
+            <div class="favorite-verse" data-id="${verse.id}">
+                <button class="delete-btn" onclick="deleteFavorite(${verse.id})">×</button>
+                <div class="verse-text">${verse.text}</div>
+                <div class="verse-reference">${verse.book} ${verse.chapter}:${verse.verse}</div>
+                <div class="saved-date">Saved on ${verse.saved_at}</div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading favorites:', error);
+        favoritesList.innerHTML = '<div class="no-favorites">Error loading favorites.</div>';
+    }
+}
+
+async function deleteFavorite(id) {
+    if (!confirm('Remove this verse from favorites?')) return;
+    
+    try {
+        const response = await fetch(`/api/favorites/${id}`, {
+            method: 'DELETE'
+        });
+        
+        if (response.ok) {
+            loadFavorites();
+        } else {
+            alert('Failed to remove verse from favorites.');
+        }
+    } catch (error) {
+        console.error('Error deleting favorite:', error);
+        alert('Failed to remove verse from favorites.');
+    }
+}
+
+// Load favorites when page loads
+document.addEventListener('DOMContentLoaded', loadFavorites);
+</script>
+{% endblock %}
