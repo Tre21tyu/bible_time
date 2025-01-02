@@ -4,7 +4,7 @@ import json
 from app import db
 from models import BibleVerse
 
-API_KEY = 'fa72307bd52b34e0c9e8e5568b11271b'  
+API_KEY = ''  
 API_URL = 'https://api.scripture.api.bible/v1/bibles'
 
 def fetch_verses():
